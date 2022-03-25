@@ -11,15 +11,18 @@ namespace Recipes13.Controllers
 {
     public class HomeController : Controller
     {
+        private RecipesDbContext _context { get; set; }
         
-
-        public HomeController()
-        {      
+        public HomeController(RecipesDbContext temp)
+        {
+            _context = temp;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var blah = _context.Recipes.ToList();
+            
+            return View(blah);
         }
 
         public IActionResult Privacy()
