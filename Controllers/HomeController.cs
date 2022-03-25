@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Recipes13.Models;
 using System;
@@ -20,7 +21,9 @@ namespace Recipes13.Controllers
 
         public IActionResult Index()
         {
-            var blah = _context.Recipes.ToList();
+            var blah = _context.Recipes
+                .FromSqlRaw("Select * From Recipes WHERE RecipeTitle Like 'a%'")
+                .ToList();
             
             return View(blah);
         }
