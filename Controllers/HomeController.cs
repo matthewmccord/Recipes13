@@ -12,17 +12,16 @@ namespace Recipes13.Controllers
 {
     public class HomeController : Controller
     {
-        private RecipesDbContext _context { get; set; }
+        private IRecipesRepository _repo { get; set; }
         
-        public HomeController(RecipesDbContext temp)
+        public HomeController(IRecipesRepository temp)
         {
-            _context = temp;
+            _repo = temp;
         }
 
         public IActionResult Index()
         {
-            var blah = _context.Recipes
-                .FromSqlRaw("Select * From Recipes WHERE RecipeTitle Like 'a%'")
+            var blah = _repo.Recipes
                 .ToList();
             
             return View(blah);

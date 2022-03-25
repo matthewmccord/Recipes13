@@ -32,6 +32,8 @@ namespace Recipes13
                options.UseMySql(Configuration["ConnectionStrings:RecipesDbConnection"]);
 
            });
+
+            services.AddScoped<IRecipesRepository, EFRecipesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
